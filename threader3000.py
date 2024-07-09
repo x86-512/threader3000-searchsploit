@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # Threader3000 - Multi-threader Port Scanner
-# A project by The Mayor
+# A project by The Mayor, modified by x256-64
 # v1.0.7
 # https://github.com/dievus/threader3000
 # Licensed under GNU GPLv3 Standards.  https://www.gnu.org/licenses/gpl-3.0.en.html
@@ -23,13 +23,15 @@ from datetime import datetime
 def main():
     socket.setdefaulttimeout(0.30)
     print_lock = threading.Lock()
-    discovered_ports = []
+    discovered_ports:list[str] = []
+    discovered_services:list[str] = []
 
 # Welcome Banner
     print("-" * 60)
     print("        Threader 3000 - Multi-threaded Port Scanner          ")
     print("                       Version 1.0.7                    ")
     print("                   A project by The Mayor               ")
+    print("                      Modified by x256-64               ")
     print("-" * 60)
     time.sleep(1)
     target = input("Enter your target IP address or URL here: ")
@@ -46,6 +48,8 @@ def main():
     print("-" * 60)
     t1 = datetime.now()
 
+
+    #Get vsion like nmap
     def portscan(port):
 
        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -92,6 +96,8 @@ def main():
     t3 = datetime.now()
     total1 = t3 - t1
 
+    #Update nmap scan to pipe version number back into script for searchsploit
+
 #Nmap Integration (in progress)
 
     def automate():
@@ -101,7 +107,8 @@ def main():
           print("-" * 60)
           print("1 = Run suggested Nmap scan")
           print("2 = Run another Threader3000 scan")
-          print("3 = Exit to terminal")
+          print("3 = Run suggested Nmap scan and use searchsploit") #New option 3 will be nmap and searchsploit
+          print("4 = Exit to terminal") #New option 3 will be nmap and searchsploit
           print("-" * 60)
           choice = input("Option Selection: ")
           if choice == "1":
@@ -123,7 +130,34 @@ def main():
                 exit()
           elif choice =="2":
              main()
-          elif choice =="3":
+          elif choice== "3":
+            nmap = "nmap -p{ports} -sV -sC -T4 -Pn -oA {ip} {ip}".format(ports=",".join(discovered_ports), ip=target)
+            command = nmap.split(' ')
+            process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr = subprocess.PIPE)
+            stdout, stderr = process.communicate()
+            #For the output, split by lines, if line has open state, get the service and version
+            outputarr = stdout.decode("utf-8").split("\n")
+            version_list = []
+            for output in outputarr:
+                if((open_ind:= output.find('open'))>-1):
+                    found_ver = output[open_ind+4:].strip()
+                    if found_ver.find(" ")>-1:
+                        version_list.append(found_ver[found_ver.find(" "):].strip())
+                    else:
+                        version_list.append(found_ver)
+            vuln_list:list[str] = []
+            try:
+                for version in version_list:
+                    vuln_command = f"searchsploit {version}".split(" ")
+                    process = subprocess.Popen(vuln_command, stdout=subprocess.PIPE, stderr = subprocess.PIPE)
+                    stdout, stderr = process.communicate()
+                    vuln_list.append(stdout.decode("utf-8"))
+                for ind, vuln in enumerate(vuln_list):
+                    print(f"Searching: {version_list[ind]}\n")
+                    print(vuln)
+            except FileNotFoundError:
+                print("Searchsploit is not installed")
+          elif choice =="4":
              sys.exit()
           else:
              print("Please make a valid selection")
