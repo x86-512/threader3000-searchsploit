@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # Threader3000 - Multi-threader Port Scanner
-# A project by The Mayor, modified by x256-64
+# A project by The Mayor modified by x256_64
 # v1.0.7
 # https://github.com/dievus/threader3000
 # Licensed under GNU GPLv3 Standards.  https://www.gnu.org/licenses/gpl-3.0.en.html
@@ -31,7 +31,7 @@ def main():
     print("        Threader 3000 - Multi-threaded Port Scanner          ")
     print("                       Version 1.0.7                    ")
     print("                   A project by The Mayor               ")
-    print("                      Modified by x256-64               ")
+    print("                      Modified by x256_64               ")
     print("-" * 60)
     time.sleep(1)
     target = input("Enter your target IP address or URL here: ")
@@ -148,7 +148,10 @@ def main():
             vuln_list:list[str] = []
             try:
                 for version in version_list:
-                    vuln_command = f"searchsploit {version}".split(" ")
+                    #vuln_command = f"searchsploit {version}".split(" ")
+                    vuln_command = ["searchsploit", version.split(" ")[0]]
+                    #print(vuln_command)
+                    #breakpoint()
                     process = subprocess.Popen(vuln_command, stdout=subprocess.PIPE, stderr = subprocess.PIPE)
                     stdout, stderr = process.communicate()
                     vuln_list.append(stdout.decode("utf-8"))
