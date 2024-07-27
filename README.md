@@ -39,8 +39,4 @@ sudo ln -s $(pwd)/threader3000.py /usr/local/bin/threader3000
 
 **Will you please integrate multiple IP addresses and different scanning tools into Threader3000, making it an all-in-one automated scanner?**
 
-Not as of current.  If you want a tool like that, I suggest [AutoEnum](https://github.com/Gr1mmie/autoenum).
-
-**Can I make pull requests with changes that I think are best for Threader3000?**
-
-You can, but these will likely be denied. Threader3000 is a tool I wrote to meet my needs in the field, and I've simply shared it with everyone. If you find an issue that causes significant issues, please report it, however changes to code on how a user thinks it should be better written or how the user feels it should function will be denied.  
+*In this fork, I may add functionality for multiple IP addresses*
