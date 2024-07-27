@@ -1,7 +1,7 @@
 # Threader3000 
 ### Multi-threaded Python Port Scanner with Nmap integration for use on Linux or Windows
 
-Threader3000 is a script written in Python3 that allows multi-threaded port scanning.  The program is interactive and simply requires you to run it to begin.  Once started, you will be asked to input an IP address or a FQDN as Threader3000 does resolve hostnames.  A full port scan can take as little as 15 seconds, but at max should take less than 1 minute 30 seconds depending on your internet connection.
+Threader3000 is a script written in Python3 that allows multi-threaded port scanning.  The program is interactive and simply requires you to run it to begin.  Once started, you will be asked to input an IP address or a FQDN as Threader3000 does resolve hostnames.  A full port scan can take as little as 15 seconds, but at max should take less than 1 minute 30 seconds depending on your internet connection.  This fork of threader3000 has been modified to include a searchsploit search in addition to an NMAP scan.
 
 ## Requirements
 Python3 must be installed on your system in order to function
@@ -40,10 +40,6 @@ sudo ln -s $(pwd)/threader3000.py /usr/local/bin/threader3000
 **Will you please integrate multiple IP addresses and different scanning tools into Threader3000, making it an all-in-one automated scanner?**
 
 Not as of current.  If you want a tool like that, I suggest [AutoEnum](https://github.com/Gr1mmie/autoenum).
-
-**Will this tool help me pass the OSCP?**
-
-This tool, when used correctly, helped me pass the OSCP exam. The OSCP is all about time management and enumeration. I give you a tool that is quick and conducts good single target scanning.  It's up to you to use it.
 
 **Can I make pull requests with changes that I think are best for Threader3000?**
 
