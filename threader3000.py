@@ -115,7 +115,8 @@ def main():
           choice = input("Option Selection: ")
           if choice == "1":
              try:
-                #print(nmap)
+                nmap = "nmap -p{ports} -sV -sC -T4 -Pn -oA {ip} {ip}".format(ports=",".join(discovered_ports), ip=target)
+                print(nmap)
                 os.mkdir(target)
                 os.chdir(target)
                 os.system(nmap)
