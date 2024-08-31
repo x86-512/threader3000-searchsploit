@@ -33,7 +33,7 @@ def main():
     print("                   A project by The Mayor               ")
     print("                      Modified by x86-512               ")
     print("-" * 60)
-    time.sleep(1)
+    #time.sleep(1)
     if not sys.argv[1]:
         target = input("Enter your target IP address or URL here: ")
     target = sys.argv[1]
