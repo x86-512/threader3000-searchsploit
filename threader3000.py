@@ -34,7 +34,9 @@ def main():
     print("                      Modified by x86-512               ")
     print("-" * 60)
     time.sleep(1)
-    target = input("Enter your target IP address or URL here: ")
+    if not sys.argv[1]:
+        target = input("Enter your target IP address or URL here: ")
+    target = sys.argv[1]
     error = ("Invalid Input")
     try:
         t_ip = socket.gethostbyname(target)
@@ -113,7 +115,7 @@ def main():
           choice = input("Option Selection: ")
           if choice == "1":
              try:
-                print(nmap)
+                #print(nmap)
                 os.mkdir(target)
                 os.chdir(target)
                 os.system(nmap)
