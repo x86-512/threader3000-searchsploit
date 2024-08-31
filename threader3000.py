@@ -31,7 +31,7 @@ def main():
     print("        Threader 3000 - Multi-threaded Port Scanner          ")
     print("                       Version 1.0.7                    ")
     print("                   A project by The Mayor               ")
-    print("                      Modified by x256_64               ")
+    print("                      Modified by x86-512               ")
     print("-" * 60)
     time.sleep(1)
     target = input("Enter your target IP address or URL here: ")
